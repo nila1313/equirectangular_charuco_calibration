@@ -1,0 +1,23 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Large local inputs and generated image outputs
+data/video/*
+data/raw_frames/*
+data/detected_frames/*
+data/rectified_frames/*
+data/rectified_detected_frames/*
+data/equirectangular_frames/*
+
+# Keep directory placeholders
+!data/video/.gitkeep
+!data/raw_frames/.gitkeep
+!data/detected_frames/.gitkeep
+!data/rectified_frames/.gitkeep
+!data/rectified_detected_frames/.gitkeep
+!data/equirectangular_frames/.gitkeep
+
+# Scratch outputs
+src/frame_*.jpg
+src/output_perspective.jpg

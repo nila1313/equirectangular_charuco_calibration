@@ -1,0 +1,5 @@
+numpy
+opencv-contrib-python
+matplotlib
+pillow
+py360convert
