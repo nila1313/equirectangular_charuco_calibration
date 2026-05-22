@@ -27,6 +27,8 @@ data/omni_perspective_frames/*
 # Scratch outputs
 src/frame_*.jpg
 src/output_perspective.jpg
+results/equirectangular_5frame_debug/*
+!results/equirectangular_5frame_debug/.gitkeep
 
 # Local backups
 *_backup.py
