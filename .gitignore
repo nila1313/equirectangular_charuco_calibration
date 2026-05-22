@@ -30,5 +30,25 @@ src/output_perspective.jpg
 results/equirectangular_5frame_debug/*
 !results/equirectangular_5frame_debug/.gitkeep
 
+# Large generated experiment outputs
+results/perspective_detection_experiment/raw_detection/*
+results/perspective_detection_experiment/perspective_best/*
+results/perspective_detection_experiment/perspective_best_detection/*
+results/hybrid_detection_selection/selected_raw/*
+results/hybrid_detection_selection/selected_detection/*
+results/hybrid_detection_selection/selected_perspective/*
+results/hybrid_omnidir_calibration/debug_mapped_points/*
+results/hybrid_threshold_calibration/debug_mapped_points/*
+results/hybrid_threshold_calibration/threshold_*/*
+
+!results/perspective_detection_experiment/raw_detection/.gitkeep
+!results/perspective_detection_experiment/perspective_best/.gitkeep
+!results/perspective_detection_experiment/perspective_best_detection/.gitkeep
+!results/hybrid_detection_selection/selected_raw/.gitkeep
+!results/hybrid_detection_selection/selected_detection/.gitkeep
+!results/hybrid_detection_selection/selected_perspective/.gitkeep
+!results/hybrid_omnidir_calibration/debug_mapped_points/.gitkeep
+!results/hybrid_threshold_calibration/debug_mapped_points/.gitkeep
+
 # Local backups
 *_backup.py
