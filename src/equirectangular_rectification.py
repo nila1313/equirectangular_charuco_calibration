@@ -47,11 +47,52 @@ def load_omni_calibration(
     return K, xi, D, image_size
 
 
+def rotation_matrix_from_euler(
+    yaw_deg: float,
+    pitch_deg: float,
+    roll_deg: float = 0.0,
+) -> np.ndarray:
+    yaw = np.deg2rad(yaw_deg)
+    pitch = np.deg2rad(pitch_deg)
+    roll = np.deg2rad(roll_deg)
+
+    Ryaw = np.array(
+        [
+            [np.cos(yaw), 0.0, np.sin(yaw)],
+            [0.0, 1.0, 0.0],
+            [-np.sin(yaw), 0.0, np.cos(yaw)],
+        ],
+        dtype=np.float64,
+    )
+
+    Rpitch = np.array(
+        [
+            [1.0, 0.0, 0.0],
+            [0.0, np.cos(pitch), -np.sin(pitch)],
+            [0.0, np.sin(pitch), np.cos(pitch)],
+        ],
+        dtype=np.float64,
+    )
+
+    Rroll = np.array(
+        [
+            [np.cos(roll), -np.sin(roll), 0.0],
+            [np.sin(roll), np.cos(roll), 0.0],
+            [0.0, 0.0, 1.0],
+        ],
+        dtype=np.float64,
+    )
+
+    return Rroll @ Rpitch @ Ryaw
+
+
 def build_equirectangular_maps(
     K: np.ndarray,
     xi: np.ndarray,
     D: np.ndarray,
     image_size: tuple[int, int],
+    yaw_deg: float = 0.0,
+    pitch_deg: float = 0.0,
 ) -> tuple[np.ndarray, np.ndarray, tuple[int, int]]:
     """
     Build longitude-latitude / equirectangular rectification maps.
@@ -61,20 +102,18 @@ def build_equirectangular_maps(
     """
     width, height = image_size
 
-    # Output size.
-    # We keep the same size first to make comparison easy.
-    output_size = (width, height)
+    output_size = (2 * width, height)
 
-    # R is identity because we do not rotate the virtual view yet.
-    R = np.eye(3, dtype=np.float64)
+    R = rotation_matrix_from_euler(
+        yaw_deg=yaw_deg,
+        pitch_deg=pitch_deg,
+        roll_deg=0.0,
+    )
 
-    # P controls the virtual camera/projection.
-    # For RECTIFY_LONGLATI, OpenCV still expects a 3x3 matrix.
-    # We start with a simple matrix based on the original image size.
     P = np.array(
         [
-            [width / np.pi, 0.0, width / 2.0],
-            [0.0, height / np.pi, height / 2.0],
+            [output_size[0] / (2.0 * np.pi), 0.0, output_size[0] / 2.0],
+            [0.0, output_size[1] / np.pi, output_size[1] / 2.0],
             [0.0, 0.0, 1.0],
         ],
         dtype=np.float64,

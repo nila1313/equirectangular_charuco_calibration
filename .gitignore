@@ -9,6 +9,9 @@ data/detected_frames/*
 data/rectified_frames/*
 data/rectified_detected_frames/*
 data/equirectangular_frames/*
+data/equirectangular_local_test/*
+data/equirectangular_rotation_test/*
+data/omni_perspective_frames/*
 
 # Keep directory placeholders
 !data/video/.gitkeep
@@ -17,7 +20,13 @@ data/equirectangular_frames/*
 !data/rectified_frames/.gitkeep
 !data/rectified_detected_frames/.gitkeep
 !data/equirectangular_frames/.gitkeep
+!data/equirectangular_local_test/.gitkeep
+!data/equirectangular_rotation_test/.gitkeep
+!data/omni_perspective_frames/.gitkeep
 
 # Scratch outputs
 src/frame_*.jpg
 src/output_perspective.jpg
+
+# Local backups
+*_backup.py
